@@ -8,7 +8,7 @@ describe 'main' do
   end
 
   it 'returns true when scenario is found' do
-    %w{c?7??sss?3rr1??????5}.each { |str| expect(pattern_exists?(str)).to eq(true) }
+    %w{c?7??sss?3rr1??????5 r1???5acc?7??sss?3r}.each { |str| expect(pattern_exists?(str)).to eq(true) }
   end
 
 end
