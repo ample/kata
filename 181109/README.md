@@ -26,7 +26,10 @@ str = "aa6???9"
 # Your function should return `false`
 
 str = "acc?7??sss?3rr1??????5"
-# Your function should return `false`
+# Your function should return `true`
+
+str = "r1???5acc?7??sss?3r"
+# Your function should return `true`
 ```
 
 ----
