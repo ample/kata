@@ -29,7 +29,7 @@ str = "acc?7??sss?3rr1??????5"
 # Your function should return `true`
 
 str = "r1???5acc?7??sss?3r"
-# Your function should return `true`
+# Your function should return `false`
 ```
 
 ----
