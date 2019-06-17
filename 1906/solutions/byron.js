@@ -5,11 +5,13 @@ fn.filterList = function(l) {
 };
 
 fn.duplicateEncode = function(word) {
-  return [...word].map(el => {
-    if ([...word].filter(c => c.toLowerCase() == el.toLowerCase()).length >= 2) {
-      return ')';
-    } else {
-      return '(';
-    }
-  });
+  return [...word]
+    .map(el => {
+      if ([...word].filter(c => c.toLowerCase() == el.toLowerCase()).length >= 2) {
+        return ')';
+      } else {
+        return '(';
+      }
+    })
+    .join('');
 };
