@@ -57,7 +57,7 @@ function runTests(name, fn) {
 
 // ---------------------------------------- | Run Tests
 
-const solutions = ['byron', 'jeff', 'maria', 'sean', 'taylor', 'warren'];
+const solutions = ['byron', 'jeff', 'maria', 'sean', 'silas', 'taylor', 'warren'];
 for (let dev of solutions) {
   const fl = require(`./solutions/${dev}`);
   runTests(dev, fl);
