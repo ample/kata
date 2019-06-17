@@ -6,5 +6,5 @@ fn.filterList = function(l) {
 
 fn.duplicateEncode = function(word) {
   const w = word.toLowerCase();
-  return [...w].map(n => w.split(n).length == 2 ? '(' : ')').join('');
+  return [...w].map(n => (w.split(n).length == 2 ? '(' : ')')).join('');
 };

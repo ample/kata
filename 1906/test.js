@@ -5,8 +5,8 @@ const assert = chai.assert;
 
 // ---------------------------------------- | Tests
 
-function runTests(fn) {
-  describe('filterList()', () => {
+function runTests(name, fn) {
+  describe(`${name.toUpperCase()}: filterList()`, () => {
     it('should return an array', () => {
       assert.typeOf(fn.filterList(['a']), 'array');
     });
@@ -32,7 +32,7 @@ function runTests(fn) {
     });
   });
 
-  describe('duplicateEncode()', () => {
+  describe(`${name.toUpperCase()}: duplicateEncode()`, () => {
     it('should return a string', () => {
       assert.typeOf(fn.duplicateEncode('din'), 'string');
     });
@@ -57,9 +57,8 @@ function runTests(fn) {
 
 // ---------------------------------------- | Run Tests
 
-const solutions = ['sean'];
+const solutions = ['jeff', 'maria', 'sean', 'taylor', 'warren'];
 for (let dev of solutions) {
-  console.log(`--- ${dev.toUpperCase()} ---`);
   const fl = require(`./solutions/${dev}`);
-  runTests(fl)
+  runTests(dev, fl);
 }
