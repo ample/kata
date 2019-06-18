@@ -43,20 +43,11 @@ Submitting Solutions
 
 Your solution should be placed in the `solutions` directory. Copy the `_default.js` file to a file with your name on it (e.g. `sean.js`). You'll notice each function gets exported from the file. That's what we want for testing — don't change any of the boilerplate (you can delete comments).
 
-To run the tests, first install dependencies:
+First, install dependencies:
 
     $ yarn install
 
-Add your name to the array of test cases for the solution you want to test in `test-cases.js`. **Your name in the array should match the name of your file**. For example, if your file is `solutions/sean.js`, then you should add `sean` to the array(s), like so:
-
-```js
-module.exports = {
-  testCase: ['sean'],
-  otherTestCase: []
-};
-```
-
-Then you can run the test suite:
+Then run the tests:
 
     $ yarn run test ./1907
 
