@@ -1,4 +1,4 @@
 module.exports = {
-  createPhoneNumber: [],
-  positiveSum: []
+  createPhoneNumber: ['sean'],
+  positiveSum: ['sean']
 };
