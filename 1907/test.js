@@ -1,6 +1,7 @@
-// ---------------------------------------- | Setup
-
 const chai = require('chai');
+const glob = require('glob');
+const path = require('path');
+
 const assert = chai.assert;
 
 // ---------------------------------------- | Tests
@@ -66,11 +67,15 @@ const tests = {
 
 // ---------------------------------------- | Run Tests
 
-const solutions = require('./test-cases');
+const files = glob
+  .sync('./1907/solutions/*.js')
+  .map(f => path.basename(f))
+  .filter(f => path.basename(f) !== '_default.js');
 
-for (let test of Object.keys(solutions)) {
-  for (let dev of solutions[test]) {
-    const fl = require(`./solutions/${dev}`);
-    tests[test](dev, fl);
+for (let filename of files) {
+  for (let test of Object.keys(tests)) {
+    const fn = require(`./solutions/${filename}`);
+    const dev = filename.replace(path.extname(filename), '');
+    if (fn[test]) tests[test](dev.toUpperCase(), fn);
   }
 }
