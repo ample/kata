@@ -12,19 +12,19 @@ const tests = {
       it('should return a number', () => {
         assert.typeOf(fn.getAverage([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'number')
       })
-      it('shuold satisfy test case #1', () => {
+      it('should satisfy test case #1', () => {
         const results = fn.getAverage([1, 2, 3])
         assert.equal(results, 2)
       })
-      it('shuold satisfy test case #2', () => {
+      it('should satisfy test case #2', () => {
         const results = fn.getAverage([-2, 2])
         assert.equal(results, 0)
       })
-      it('shuold satisfy test case #3', () => {
+      it('should satisfy test case #3', () => {
         const results = fn.getAverage([-5, 2, 2])
         assert.equal(results, -1)
       })
-      it('shuold satisfy test case #4', () => {
+      it('should satisfy test case #4', () => {
         const results = fn.getAverage([1, 1, 1, 1, 1, 2, 1, 2])
         assert.equal(results, 1)
       })
@@ -33,6 +33,24 @@ const tests = {
 
   maxSequence: function(name, fn) {
     describe(`[1909] ${name.toUpperCase()}: maxSequence()`, () => {
+      if (name == 'TAYLOR') {
+        it('should return sum from array of numbers', () => {
+          assert.equal(fn.getSum([1, 2, 3]), 6)
+          assert.equal(fn.getSum([0, 10, -5]), 5)
+        })
+
+        it('should return array containing unique values', () => {
+          let a = [1, 2, 3, 4, 5]
+          assert.sameDeepMembers(fn.getUniq([1, 1, 2, 3, 4, 4, 5]), a)
+        })
+
+        it('return all possible sequences from array', () => {
+          let expected = [[1], [1, 2], [1, 2, 3], [2], [2, 3], [3]]
+          let sequences = fn.getSequences([1, 2, 3])
+          assert.sameDeepMembers(sequences, expected)
+        })
+      }
+
       it('should return a number', () => {
         assert.typeOf(fn.maxSequence([1, 2, 3]), 'number')
       })
