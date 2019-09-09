@@ -12,11 +12,13 @@ fn.getUniq = arr => {
 // Return all sequences in array
 fn.getSequences = arr => {
   let sets = []
-  arr.forEach((el, i) => {
-    for (let j = 0; j < arr.length; j++) {
-      sets.push(Array.from(arr).splice(i, j + 1))
+  let n = arr.length
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      let set = Array.from(arr).splice(i, j + 1)
+      sets.push(set)
     }
-  })
+  }
   return fn.getUniq(sets)
 }
 
