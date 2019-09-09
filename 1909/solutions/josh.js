@@ -12,7 +12,7 @@ fn.maxSequence = function(arr) {
   // Will hold max number at any given point
   let max = 0
   // Iterate over each element
-  arr.forEach((el, index) => {
+  arr.forEach((_, index) => {
     // for each element, find the sum for each following subarray starting at that index
     for (let iterator = index + 1; iterator <= arr.length; iterator++) {
       // If sum from [index,iterator] is larger than current max, update max
