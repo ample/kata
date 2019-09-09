@@ -44,7 +44,7 @@ const tests = {
           assert.sameDeepMembers(fn.getUniq([1, 1, 2, 3, 4, 4, 5]), a)
         })
 
-        it('return all possible sequences from array', () => {
+        it('should return all possible sequences from array', () => {
           let expected = [[1], [1, 2], [1, 2, 3], [2], [2, 3], [3]]
           let sequences = fn.getSequences([1, 2, 3])
           assert.sameDeepMembers(sequences, expected)
