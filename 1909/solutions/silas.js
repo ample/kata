@@ -5,7 +5,7 @@ fn.getAverage = function(nums) {
   for (var i = 0; i < nums.length; i++) {
     sum = nums[i] + sum
   }
-  return Math.round(sum / nums.length)
+  return Math.floor(sum / nums.length)
 }
 
 fn.maxSequence = function(arr) {
