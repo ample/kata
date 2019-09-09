@@ -7,7 +7,3 @@ fn.getAverage = function(nums) {
   }
   return Math.floor(sum / nums.length)
 }
-
-fn.maxSequence = function(arr) {
-  // ...
-}
