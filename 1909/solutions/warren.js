@@ -13,5 +13,5 @@ fn.maxSequence = function(arr) {
       if (testSum > currentMax) { currentMax = testSum }
     }
   }
-  return currentMax
+  return currentMax < 0 ? 0 : currentMax
 };
