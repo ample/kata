@@ -34,19 +34,23 @@ const tests = {
     describe(`[1910] ${name.toUpperCase()}: sumOfPairs()`, () => {
       it('should satisfy test case #1', () => {
         const results = fn.sumOfPairs([1, 2, 3, 2], 4)
-        assert.equal(results, [1, 3])
+        assert.deepEqual(results, [1, 3])
       })
       it('should satisfy test case #2', () => {
         const results = fn.sumOfPairs([1, 1, 2], 2)
-        assert.equal(results, [1, 1])
+        assert.deepEqual(results, [1, 1])
       })
       it('should satisfy test case #3', () => {
         const results = fn.sumOfPairs([0, 2, 6, 4], 6)
-        assert.equal(results, [0, 6])
+        assert.deepEqual(results, [0, 6])
       })
       it('should satisfy test case #4', () => {
         const results = fn.sumOfPairs([12, 4, -6, 0, 2], 6)
-        assert.equal(results, [12, -6])
+        assert.deepEqual(results, [12, -6])
+      })
+      it('should satisfy test case #5', () => {
+        const results = fn.sumOfPairs([3, 4, -6, 0, 7], 6)
+        assert.equal(results, undefined)
       })
     })
   },

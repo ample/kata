@@ -26,7 +26,7 @@ Credit for the string sources goes to:
 
 ### Problem 2: Sum of Pairs
 
-Given an array of numbers and a sum, return an array of the **first** occurring pair of nodes in that add to the sum.
+Given an array of numbers and a sum, return an array of the **first** occurring pair of nodes in that add to the sum. If no pair exists, the function should return `undefined`.
 
 For example, if the array of numbers is `[1, 2, 3, 2]` and sum is `4`, the returned array should be `[1, 3]` because `1 + 3 = 4` and that pair occurs before `2 + 2`.
 
@@ -43,6 +43,7 @@ Test.assertEquals(sumOfPairs([1, 2, 3, 2], 4), [1, 3])
 Test.assertEquals(sumOfPairs([1, 1, 2], 2), [1, 1])
 Test.assertEquals(sumOfPairs([0, 2, 6, 4], 6), [0, 6])
 Test.assertEquals(sumOfPairs([12, 4, -6, 0, 2], 6), [12, -6])
+Test.assertEquals(sumOfPairs([3, 4, -6, 0, 7], 6), undefined)
 ```
 
 ## Submitting Solutions
