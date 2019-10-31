@@ -20,5 +20,15 @@ fn.toWeirdCase = function(str) {
 }
 
 fn.duplicateCount = function(str) {
-  // ...
+  let occurrences = {}
+  let characters = str
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9]/g, '')
+    .split('')
+
+  characters.forEach(element => {
+    occurrences[element] = occurrences[element] ? occurrences[element] + 1 : 1
+  })
+
+  return Object.values(occurrences).filter(occurrence => occurrence > 1).length
 }
