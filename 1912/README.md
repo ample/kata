@@ -4,7 +4,7 @@ Another two problems for our next Dev Code Share meeting:
 
 ## Problems
 
-### Problem 2: Password Regex
+### Problem 1: Password Regex
 
 Given a password (as a string), validate the password using a [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
