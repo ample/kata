@@ -49,7 +49,7 @@ Then run the tests:
 
     $ yarn test
 
-Once your solutions are passing, open a pull request with your changes, using the format: _[ID]: Name_ (e.g. `[1906]: Tyler`).
+Once your solutions are passing, open a pull request with your changes, using the format: _[ID]: Name_ (e.g. `[1906]: Taylor`).
 
 ### Omitting Solutions
 
