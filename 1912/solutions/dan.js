@@ -35,5 +35,16 @@ fn.validatePassword = function(password) {
 }
 
 fn.humanReadableTime = function(seconds) {
-  // ...
+  if (seconds === 0) {
+    return '00:00:00'
+  }
+
+  const hourInSeconds = 3600
+  const minuteInSeconds = 60
+  const hours = Math.floor(seconds / hourInSeconds)
+  seconds = seconds - hours * hourInSeconds
+  const minutes = Math.floor(seconds / minuteInSeconds)
+  seconds = seconds - minutes * minuteInSeconds
+
+  return [hours, minutes, seconds].map(time => time.toString().padStart(2, '0')).join(':')
 }
