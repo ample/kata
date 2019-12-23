@@ -1,81 +1,155 @@
 const fn = (module.exports = {})
 
-const addEllipses = pagination => {
-  pagination = pagination.filter(page => !isNaN(parseInt(page, 10)))
-  const minPage = Math.min(...pagination)
-  const maxPage = Math.max(...pagination)
+class PaginationCollection {
+  constructor(pageCount, currentPage) {
+    this._pageCount = this.normalizePageCount(pageCount)
+    this._currentPage = this.normalizeCurrentPage(currentPage)
+    this._items = [
+      this.firstPage(),
+      this.calculatePreviousPage(currentPage),
+      this.currentPage(),
+      this.calculateNextPage(currentPage),
+      this.pageCount()
+    ]
+  }
 
-  return [...Array(maxPage).keys()].map(index => {
+  pageCount() {
+    return this._pageCount
+  }
+
+  currentPage() {
+    return this._currentPage
+  }
+
+  firstPage() {
+    return 1
+  }
+
+  pageLimit() {
+    return 5
+  }
+
+  normalizePageCount(count) {
+    count = parseInt(count, 10)
+    return isNaN(count) ? 0 : count
+  }
+
+  normalizeCurrentPage(page) {
+    page = parseInt(page, 10)
+    if (isNaN(page) || page < 1) {
+      return 1
+    }
+
+    return page
+  }
+
+  calculateNextPage(currentPage) {
+    return currentPage + 1
+  }
+
+  calculatePreviousPage(currentPage) {
+    return currentPage - 1
+  }
+
+  addEllipsis(index) {
     let pageNumber = index + 1
-    let inBounds = pageNumber > maxPage || pageNumber < minPage
+    let aboveMaximum = pageNumber > this.maximumPage()
+    let belowMinimum = pageNumber < this.minimumPage()
 
-    if (inBounds) {
+    if (aboveMaximum || belowMinimum) {
       return undefined
     }
 
-    if (pagination.includes(pageNumber)) {
+    if (this._items.includes(pageNumber)) {
       return pageNumber
     }
 
     return '...'
-  })
-}
+  }
 
-const removeDuplicates = pagination => {
-  let previous
-  return pagination.filter(page => {
-    let isDuplicate = page === previous
-    previous = page
-    return !isDuplicate
-  })
+  minimumPage() {
+    return Math.min(...this._items)
+  }
+
+  maximumPage() {
+    return Math.max(...this._items)
+  }
+
+  addEllipses() {
+    this._items = this._items.filter(page => !isNaN(parseInt(page, 10)))
+    this._items = [...Array(this.maximumPage()).keys()].map(this.addEllipsis.bind(this))
+
+    return this
+  }
+
+  forceTwoOnFirstPage() {
+    if (this.currentPage() === this.firstPage()) {
+      this._items.push(this.currentPage() + 2)
+    }
+
+    return this
+  }
+
+  forceTwoOnLastPage() {
+    if (this.currentPage() === this.pageCount()) {
+      this._items.push(this.currentPage() - 2)
+    }
+
+    return this
+  }
+
+  removeDuplicates() {
+    let previous
+    this._items = this._items.filter(page => {
+      let isDuplicate = page === previous
+      previous = page
+      return !isDuplicate
+    })
+
+    return this
+  }
+
+  removeOutOfBounds() {
+    this._items = this._items.filter(page => {
+      const outOfBounds = page > this.pageCount() || page < this.firstPage()
+      return !outOfBounds
+    })
+
+    return this
+  }
+
+  sliceToPageLimit() {
+    this._items = this._items.sort().slice(0, this.pageLimit())
+
+    return this
+  }
+
+  removeUndefined() {
+    this._items.filter(item => item === undefined)
+    return this
+  }
+
+  items() {
+    return this._items
+  }
+
+  all() {
+    if (this.pageCount() <= 1) {
+      return []
+    }
+
+    return this.forceTwoOnFirstPage()
+      .forceTwoOnFirstPage()
+      .forceTwoOnLastPage()
+      .removeOutOfBounds()
+      .sliceToPageLimit()
+      .addEllipses()
+      .removeDuplicates()
+      .removeUndefined()
+      .items()
+  }
 }
 
 fn.getPaginationPages = function(pageCount, currentPage) {
-  pageCount = parseInt(pageCount, 10)
-  pageCount = isNaN(pageCount) ? 0 : pageCount
-
-  currentPage = parseInt(currentPage, 10)
-  if (isNaN(currentPage) || currentPage < 1) {
-    currentPage = 1
-  }
-
-  // If there is only one page (or no pages), don't show any pagination.
-  if (pageCount <= 1) {
-    return []
-  }
-
-  // Always show the first and last pages.
-  const firstPage = 1
-
-  // Always show the page before and the page after the current page, assuming that page exists.
-  let nextPage = currentPage + 1
-  nextPage = nextPage >= pageCount ? pageCount : nextPage
-  let previousPage = currentPage - 1
-  previousPage = previousPage > firstPage ? previousPage : firstPage
-
-  // @todo Never show more than five page numbers.
-
-  let pagination = [firstPage, previousPage, currentPage, nextPage, pageCount]
-
-  // If the current page is the first page, show the next two pages, or if it is the last page, show the previous two pages(assuming those pages exist).
-  if (currentPage === firstPage) {
-    pagination.push(currentPage + 2)
-  }
-
-  if (currentPage === pageCount) {
-    pagination.push(currentPage - 2)
-  }
-
-  pagination = removeDuplicates(pagination)
-    .map(page => {
-      const outOfBounds = page > pageCount || page < firstPage
-      return outOfBounds ? undefined : page
-    })
-    .sort()
-    .filter(page => page !== undefined)
-
-  pagination = addEllipses(pagination, firstPage, pageCount)
-  pagination = removeDuplicates(pagination)
-
-  return pagination
+  return new PaginationCollection(pageCount, currentPage).all()
 }
