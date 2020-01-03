@@ -10,5 +10,11 @@ fn.validatePassword = function (password) {
 }
 
 fn.humanReadableTime = function (seconds) {
-  // ...
+    const hour = Math.trunc(seconds/3600)
+    const minute = Math.trunc((seconds - (hour * 3600))/60) % 60
+    const second = (seconds - (minute * 60) - (hour * 3600)) % 60
+  
+    const padZero = (number) => ('0' + number).slice(-2)
+  
+    return `${padZero(hour)}:${padZero(minute)}:${padZero(second)}` 
 }
