@@ -3,13 +3,13 @@ const data = require('../data.json')
 const fn = (module.exports = {})
 
 fn.sortBy = function(attr, reverse = false) {
-  console.log(data.filter(x => Object.keys(x).includes(attr)))
-  if (data.filter(x => Object.keys(x).includes(attr)).length === 0) return data
+  // console.log(data.filter(x => Object.keys(x).includes(attr)))
+  if ([...data].filter(x => Object.keys(x).includes(attr)).length === 0) return [...data]
   return [...data].sort((a, b) => (reverse ? b[attr] > a[attr] : a[attr] > b[attr]))
 }
 
 fn.getNames = function() {
-  return data
+  return [...data]
     .map(x => x.name)
     .sort()
     .join(',')
@@ -21,7 +21,7 @@ fn.injectNameParts = function() {
   const getLastName = name => getNameParts(name)[getNameParts(name).length - 1]
   const getMiddleName = name => (getNameParts(name).length > 2 ? getNameParts(name)[1] : undefined)
 
-  return data.map(x => ({
+  return [...data].map(x => ({
     ...x,
     firstName: getFirstName(x.name),
     lastName: getLastName(x.name),
