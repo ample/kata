@@ -3,6 +3,7 @@ const data = require('../data.json')
 const fn = (module.exports = {})
 
 fn.sortBy = function(attr, reverse = false) {
+  console.log(data.filter(x => Object.keys(x).includes(attr)))
   if (data.filter(x => Object.keys(x).includes(attr)).length === 0) return data
   return [...data].sort((a, b) => (reverse ? b[attr] > a[attr] : a[attr] > b[attr]))
 }
