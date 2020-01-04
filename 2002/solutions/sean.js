@@ -3,8 +3,8 @@ const data = require('../data.json')
 const fn = (module.exports = {})
 
 fn.sortBy = function(attr, reverse = false) {
-  let result = [...data].sort((a, b) => (a[attr] > b[attr] ? 1 : -1))
-  return reverse ? result.reverse() : result
+  if (data.filter(x => Object.keys(x).includes(attr)).length === 0) return data
+  return [...data].sort((a, b) => (reverse ? b[attr] > a[attr] : a[attr] > b[attr]))
 }
 
 fn.getNames = function() {

@@ -11,7 +11,6 @@ const tests = {
     describe(`[2002] ${name.toUpperCase()}: sortBy()`, () => {
       it('should sort by name', () => {
         const results = fn.sortBy('name').map(x => x.name)
-        console.log(results)
         assert.deepEqual(results, [
           'Alex W Bier',
           'Catherine Bernard',
@@ -23,7 +22,6 @@ const tests = {
       })
       it('should sort by birthdate', () => {
         const results = fn.sortBy('birthdate').map(x => x.name)
-        console.log(results)
         assert.deepEqual(results, [
           'Steve Smith',
           'Alex W Bier',
@@ -35,7 +33,6 @@ const tests = {
       })
       it('should not change the order when the property does not exist', () => {
         const results = fn.sortBy('WRONG!').map(x => x.name)
-        console.log(results)
         assert.deepEqual(results, [
           'Dave Andrews',
           'Steve Smith',
@@ -47,7 +44,6 @@ const tests = {
       })
       it('can sort in reverse order', () => {
         const results = fn.sortBy('name', true).map(x => x.name)
-        console.log(results)
         assert.deepEqual(results, [
           'Zoe Johnson',
           'Steve Smith',
@@ -64,7 +60,6 @@ const tests = {
     describe(`[2002] ${name.toUpperCase()}: getNames()`, () => {
       it('should render a comma-separated list of names alphabetically', () => {
         const results = fn.getNames()
-        console.log(results)
         assert.equal(
           results,
           'Alex W Bier,Catherine Bernard,Dave Andrews,Mary Williamson,Steve Smith,Zoe Johnson'
@@ -77,17 +72,14 @@ const tests = {
     describe(`[2002] ${name.toUpperCase()}: injectNameParts()`, () => {
       it('should add a firstName property', () => {
         const results = fn.injectNameParts().map(x => x.firstName)
-        console.log(results)
         assert.deepEqual(results, ['Dave', 'Steve', 'Mary', 'Zoe', 'Alex', 'Catherine'])
       })
       it('should add a lastName property', () => {
         const results = fn.injectNameParts().map(x => x.lastName)
-        console.log(results)
         assert.deepEqual(results, ['Andrews', 'Smith', 'Williamson', 'Johnson', 'Bier', 'Bernard'])
       })
       it('should add a middleName property', () => {
         const results = fn.injectNameParts().map(x => x.middleName)
-        console.log(results)
         assert.deepEqual(results, [undefined, undefined, undefined, undefined, 'W', undefined])
       })
     })
