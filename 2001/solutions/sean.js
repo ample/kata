@@ -5,9 +5,6 @@ fn.getPaginationPages = function(pageCount, currentPage) {
   if (pageCount <= 1) return []
   // When there are five or fewer pages, show all of them.
   if (pageCount <= 5) return Array.from(Array(pageCount).keys()).map(n => n + 1)
-  // Build a reference to every possible page. (This has a leading zero index,
-  // but it gets skipped over when this is used below.)
-  let allNums = Array.from(Array(pageCount + 1).keys())
   // The first page is always listed.
   let nums = [1]
   // Find the pages to include, surrounding the active item. If the current page
