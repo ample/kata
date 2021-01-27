@@ -31,7 +31,7 @@ const tests = {
           'Dave Andrews'
         ])
       })
-      it('should not change the order when the property doesn not exist', () => {
+      it('should not change the order when the property does not exist', () => {
         const results = fn.sortBy('WRONG!').map(x => x.name)
         assert.deepEqual(results, [
           'Dave Andrews',
